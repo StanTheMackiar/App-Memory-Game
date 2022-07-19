@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorama</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://dl.dropbox.com/s/nx5bm4hh67xwkvr/icon.png?dl=0">
+</head>
+<body>
+    <header>
+        <h1>Juego de memoria</h1>
+    </header>
+    <main>
+        <div id="juegoMemoria">
+        <section id="seccionJuego">
+          <p id="botonIniciarJuego">Iniciar juego</p>
+          <!-- <input type="number" min="10" max="60"> -->
+          <h4 class="juegoMensaje">Encuentra las parejas</h4>
+          <table id="tablaJuegoMemoria">
+            <tr>
+              <th><button id="juegoBoton0" class="botonesJuego"></button></th>
+              <th><button id="juegoBoton1" class="botonesJuego"></button></th>
+              <th><button id="juegoBoton2" class="botonesJuego"></button></th>
+              <th><button id="juegoBoton3" class="botonesJuego"></button></th>
+            </tr>
+            <tr>
+             <td><button id="juegoBoton4" class="botonesJuego"></button></td>
+             <td><button id="juegoBoton5" class="botonesJuego"></button></td>
+             <td><button id="juegoBoton6" class="botonesJuego"></button></td>
+             <td><button id="juegoBoton7" class="botonesJuego"></button></td>
+           </tr>
+            <tr>
+              <td><button id="juegoBoton8" class="botonesJuego"></button></td>
+              <td><button id="juegoBoton9" class="botonesJuego"></button></td>
+              <td><button id="juegoBoton10" class="botonesJuego"></button></td>
+              <td><button id="juegoBoton11" class="botonesJuego"></button></td>
+            </tr>
+           <tr>
+              <td><button id="juegoBoton12" class="botonesJuego"></button></td>
+             <td><button id="juegoBoton13" class="botonesJuego"></button></td>
+             <td><button id="juegoBoton14" class="botonesJuego"></button></td>
+             <td><button id="juegoBoton15" class="botonesJuego"></button></td>
+           </tr>
+         </table>
+        </section>
+        <section id="seccionEstadisticas">
+          <h4 id='juegoAciertos' class="estadisticas">Aciertos: 0</h4>
+          <h4 id='juegoTiempoRestante' class="estadisticas"></h4>
+          <h4 id='juegoMovimientos' class="estadisticas">Movimientos: 0</h4>
+          <img class="sonidoActivado" id="sonido">
+          <img id="reload" src="./img/reset.png">
+        </section>
+      </div>
+    </main>
+    <script src="script2.js"></script>
+</body>
+</html>

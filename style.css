@@ -1,0 +1,205 @@
+
+  /* JUEGO MEMORIA */
+  body {
+    background: rgb(118,205,150);
+    background: linear-gradient(317deg, rgba(118,205,150,1) 0%, rgba(38,203,187,1) 64%, rgba(58,134,215,1) 100%);
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;  
+    -khtml-user-select: none;    
+    -moz-user-select: none;     
+    -ms-user-select: none;   
+    user-select: none; 
+    height: 80vh;
+    margin: 10vh 0;
+    font-family: "Exo", sans-serif;
+}
+  header h1 {
+    text-align: center;
+    max-width: 50rem;
+    background-color: rgba(48, 21, 206, 0.2);
+    border-radius: 0.5rem;
+    font-size: 40px;
+    color: azure;
+    padding: 0.6rem;
+    font-family: "Exo", sans-serif;
+    margin: 1rem auto;
+  }
+  header h1:hover {
+    background-color: rgba(48, 21, 206, 0.6);
+    transition: all 0.3s ease-out;
+  }
+  #botonIniciarJuego {
+    color: white; 
+    font-weight: bold; 
+    display: inline-block;
+    background-color: rgba(48, 21, 206, 0.2);
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    margin: 0 auto 0.5rem auto;
+    width: 10rem;
+    text-align: center;
+    display: block;
+
+  }
+  #botonIniciarJuego:hover {
+    cursor: pointer;
+    background-color: rgba(48, 21, 206, 0.6);
+    transition: all 0.3s ease-out;
+  }
+  #tablaJuegoMemoria {
+    margin: 1rem auto;
+    
+  }
+  #juegoMemoria {
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    background: rgba(118, 141, 205, 0.2);
+    max-width: 50rem;
+    margin: 0 auto;
+  }
+  .botonesJuego {
+    border: none;
+    border-radius: 0.5rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: 0.1rem;
+    font-family: "Exo", sans-serif;
+    background-color: rgb(217, 242, 243);
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;  
+    -khtml-user-select: none;    
+    -moz-user-select: none;     
+    -ms-user-select: none;   
+    user-select: none;     
+  }
+  .botonesJuego:hover {
+    background-color: rgba(48, 21, 206, 0.3);
+    color: whitesmoke;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .botonesJuego:disabled {
+    background-color: rgba(48, 21, 206, 0.4);
+    color: whitesmoke;
+}
+  #seccionEstadisticas {
+    background-color: rgba(48, 21, 206, 0.2);
+    padding: 0.1rem;
+    border-radius: 0.2rem;
+    max-width: 50rem;
+  }
+  .estadisticas {
+    color: whitesmoke;
+    font-size: 18px;
+    margin: 0.3rem;
+    text-align: center;   
+  }
+  #juegoAciertos, #juegoMovimientos, #juegoTiempoRestante {
+    background-color: rgba(48, 21, 206, 0.2);
+    width: 60%;
+    margin: 0.2rem auto;
+    padding: 0.1rem;
+    border-radius: 0.2rem;
+  }
+  #juegoAciertos:hover, #juegoMovimientos:hover, #juegoTiempoRestante:hover {
+    background-color: rgba(48, 21, 206, 0.6);
+    transition: all 0.3s ease-out;
+  }
+  .reiniciarJuego {
+    color: white; 
+    font-weight: bold; 
+    display: inline-block;
+    background-color: rgba(48, 21, 206, 0.2);
+    border-radius: 0.3rem;
+    padding: 0.2rem;
+    margin: 0.1rem;
+  }
+  .reiniciarJuego:hover {
+    cursor: pointer;
+    background-color: rgba(48, 21, 206, 0.6);
+    transition: all 0.3s ease-out;
+  }
+  .juegoMensaje {
+    color: whitesmoke;
+    font-size: 17px;
+    margin: 0.2rem;
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+    text-align: center;
+    background-color: rgba(48, 21, 206, 0.2);
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;  
+    -khtml-user-select: none;    
+    -moz-user-select: none;     
+    -ms-user-select: none;   
+    user-select: none;     
+  }
+  .juegoMensaje:hover {
+    background-color: rgba(48, 21, 206, 0.4);
+    transition: all 0.3s ease-out;
+  }
+  .juegoMensajePositivo {
+    color: rgb(168, 221, 194);
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0.2rem;
+    padding: 0.5rem;
+    text-align: center;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;  
+    -khtml-user-select: none;    
+    -moz-user-select: none;     
+    -ms-user-select: none;   
+    user-select: none;     
+  }
+  .juegoMensajeNegativo {
+    color: rgb(247, 203, 203);
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0.2rem;
+    padding: 0.5rem;
+    text-align: center;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;  
+    -khtml-user-select: none;    
+    -moz-user-select: none;     
+    -ms-user-select: none;   
+    user-select: none;     
+  }
+  .imagenesTarjetas {
+    width: 80%;
+  }
+  #sonido {
+    width: 1.5rem;
+    background-color:  rgba(251, 250, 255, 0.3);
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    float: right;
+    position: relative;
+    bottom: 2.2rem;
+    right: 0.3rem;
+  }
+  #sonido:hover {
+    background-color:  rgba(48, 21, 206, 0.2);
+    cursor: pointer;
+  }
+  .sonidoActivado {
+    content: url("./img/sonido.png");
+  }
+  .sonidoDesactivado {
+    content: url("./img/silencio.png");
+  }
+  #reload {
+    width: 1.5rem;
+    background-color:  rgba(251, 250, 255, 0.3);
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    float: left;
+    position: relative;
+    bottom: 2.2rem;
+    left: 0.3rem;
+  }
+  #reload:hover {
+    background-color:  rgba(48, 21, 206, 0.2);
+    cursor: pointer;
+  }
