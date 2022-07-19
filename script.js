@@ -10,6 +10,7 @@ let tiempoTotal = 20; // TIEMPO RESTANTE EN SEGUNDOS
 let estadoTemporizador = false; 
 let TimeoutMensajeAcierto = null;
 let intervaloTemporizador = null; // METODO SETINTERVAL QUE MANEJA EL TEMPORIZADOR
+let juegoIniciado = false; 
 
 // NODOS HTML
 const mostrarAciertos = document.querySelector("#juegoAciertos"); // ACIERTOS EN PANTALLA
@@ -18,8 +19,16 @@ const mostrarMovimientos = document.querySelector("#juegoMovimientos"); // MOVIM
 const mostrarMensaje = document.querySelector(".juegoMensaje"); // MENSAJE SUPERIOR
 const botonReset = document.createElement("p").innerHTML = `<p onclick="location.reload()" class="reiniciarJuego">Reiniciar juego</p>` // COLOCA EL BOTON PARA REINICIAR EL JUEGO
 const sonido = document.querySelector("#sonido");
+const seccionJuegoPadre = document.querySelector("#seccionJuego") //ELEMENTO PADRE SECCION JUEGO
+const botonIniciarJuego = document.querySelector("#botonIniciarJuego");
 
 // SONIDOS
+
+// ESCRIBIENDO HTML CON JS
+
+mostrarTiempo.innerHTML = `Tiempo restante: ${tiempoTotal}`
+
+//SONIDOS
 
 let sonidoGanar = new Audio('./sounds/gamewin.wav');
 let sonidoPerder = new Audio('./sounds/gamelose.wav');
@@ -33,24 +42,59 @@ let arregloNum = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8]
 arregloNum = arregloNum.sort(()=>{return Math.random()-0.5})
 console.log(arregloNum);
 
+
+
+function iniciarJuego() {
+  console.log(`iniciar`);
+  juegoIniciado = true;
+  seccionJuegoPadre.removeChild(botonIniciarJuego);
+  bloquearTarjetas();
+  setTimeout(()=> {
+    desbloquearTarjetas()
+    //MENSAJE POR DEFECTO
+    mostrarMensaje.innerHTML = mostrarMensaje.innerHTML = 'Encuentra las parejas'
+  }, 2000);
+}
+
 // COMIENZO DEL JUEGO
-
-bloquearTarjetas();
-mostrarTiempo.innerHTML = `Tiempo restante: ${tiempoTotal}`
-setTimeout(()=> {
-  desbloquearTarjetas()
-  //MENSAJE POR DEFECTO
-  mostrarMensaje.innerHTML = mostrarMensaje.innerHTML = 'Encuentra las parejas'
-}, 2000);
-
 
 
 
 //FUNCIONES
 
+//FUNCION BLOQUEAR TARJETAS 
+function bloquearTarjetas() {
+  // CORRIGIENDO BUG AL BLOQUEAR TODAS LAS TARJETAS
+  const intervalBloquearTarjetas = setInterval(()=> {
+  for (let i = 0; i <= 15; i++) {
+    const bloquearTarjeta = document.getElementById(`juegoBoton${i}`);
+    bloquearTarjeta.innerHTML = `<img src="./img/${arregloNum[i]}.png" class="imagenesTarjetas">`;
+    bloquearTarjeta.disabled = true;
+  }
+  if (aciertos === 8) { 
+    // MENSAJE AL GANAR EL JUEGO
+    mostrarMensaje.innerHTML = `Felicidades!, has conseguido ganar en ${20 - tiempoTotal} segundos. ${botonReset}`
+   // MENSAJE AL PERDER Y HACER 0 ACIERTOS
+  } else if (aciertos === 0 && tiempoTotal === 0) {
+    mostrarMensaje.innerHTML = `Has perdido :( ${botonReset}`
+  } else if (aciertos === 0) {
+     // MENSAJE INICIAL
+    mostrarMensaje.innerHTML = `Memoriza!`
+  } else {
+    // MENSAJE AL PERDER EL JUEGO
+    mostrarMensaje.innerHTML = `Has perdido :( ${botonReset}`
+    mostrarTiempo.innerHTML = `Se agoto el tiempo`;
+  }
+  }, 5)
+  //DETENIENDO EL INTERVAL QUE CORRIJE EL BUG PARA DESESTRESAR EL CPU
+  setTimeout(()=>clearInterval(intervalBloquearTarjetas), 800)
+}
+
+
 //FUNCION BOTON DESACTIVAR/ACTIVAR SONIDO
+
 function botonSonido() {
-  sonido.classList.toggle("sonidoDesactivado")
+   sonido.classList.toggle("sonidoDesactivado")
   if (sonido.classList.contains('sonidoDesactivado')) {
     sonidoGanar.muted = true;
     sonidoPerder.muted = true;
@@ -65,7 +109,6 @@ function botonSonido() {
     sonidoClick.muted = false;
   }
 }
-
 
 //FUNCION DESBLOQUEAR TARJETAS (INICIO DEL JUEGO)
 function desbloquearTarjetas() {
@@ -95,6 +138,7 @@ function iniciarTemporizador() {
 
 //FUNCION PRINCIPAL
 function destaparTarjeta(id) {
+  if (juegoIniciado === true) {
     contadorTarjetas++;
     iniciarTemporizador();
     console.log(`Contador: ${contadorTarjetas}`);
@@ -166,39 +210,13 @@ function destaparTarjeta(id) {
     bloquearTarjetas();
   }
 }
-
-//FUNCION BLOQUEAR TARJETAS 
-function bloquearTarjetas() {
-  // CORRIGIENDO BUG AL BLOQUEAR TODAS LAS TARJETAS
-  const intervalBloquearTarjetas = setInterval(()=> {
-  for (let i = 0; i <= 15; i++) {
-    const bloquearTarjeta = document.getElementById(`juegoBoton${i}`);
-    bloquearTarjeta.innerHTML = `<img src="./img/${arregloNum[i]}.png" class="imagenesTarjetas">`;
-    bloquearTarjeta.disabled = true;
-  }
-  if (aciertos === 8) { 
-    // MENSAJE AL GANAR EL JUEGO
-    mostrarMensaje.innerHTML = `Felicidades!, has conseguido ganar en ${20 - tiempoTotal} segundos. ${botonReset}`
-   // MENSAJE AL PERDER Y HACER 0 ACIERTOS
-  } else if (aciertos === 0 && tiempoTotal === 0) {
-    mostrarMensaje.innerHTML = `Has perdido :( ${botonReset}`
-  } else if (aciertos === 0) {
-     // MENSAJE INICIAL
-    mostrarMensaje.innerHTML = `Memoriza!`
-  } else {
-    // MENSAJE AL PERDER EL JUEGO
-    mostrarMensaje.innerHTML = `Has perdido :( ${botonReset}`
-    mostrarTiempo.innerHTML = `Se agoto el tiempo`;
-  }
-  }, 5)
-  //DETENIENDO EL INTERVAL QUE CORRIJE EL BUG PARA DESESTRESAR EL CPU
-  setTimeout(()=>clearInterval(intervalBloquearTarjetas), 800)
 }
 
 
 // OBTENIENDO BOTONES
 sonido.addEventListener('click', botonSonido);
 reload.addEventListener('click', ()=> location.reload());
+botonIniciarJuego.addEventListener('click', iniciarJuego);
 juegoBoton0.addEventListener('click', () => destaparTarjeta(0));
 juegoBoton1.addEventListener('click', () => destaparTarjeta(1));
 juegoBoton2.addEventListener('click', () => destaparTarjeta(2));
