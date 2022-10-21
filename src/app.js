@@ -1,22 +1,37 @@
 "use strict";
 
-import { botonIniciarJuego, d, mostrarAciertos, mostrarMensaje, tiempoRestante, botonReset, mostrarMovimientos, seccionJuegoPadre, sonido } from "./modules/htmlElements.js";
-import { acierto, botonSonido, click, equivocarse, ganar, perder} from "./modules/sounds.js";
-
+import {
+  botonIniciarJuego,
+  d,
+  mostrarAciertos,
+  mostrarMensaje,
+  tiempoRestante,
+  botonReset,
+  mostrarMovimientos,
+  seccionJuegoPadre,
+  sonido,
+} from "./modules/htmlElements.js";
+import {
+  acierto,
+  botonSonido,
+  click,
+  equivocarse,
+  ganar,
+  perder,
+} from "./modules/sounds.js";
 
 let contadorTarjetas = 0;
-let destaparTarjeta1, destaparTarjeta2 ;
+let destaparTarjeta1, destaparTarjeta2;
 let valorTarjeta1, valorTarjeta2;
 let movimientos = 0;
-let aciertos = 0;
+let aciertos = 5;
 let tiempoTotal = 20; // En segundos
 let estadoTemporizador = false;
 let juegoIniciado = false;
-let temporizadorErrorParejas, temporizador;
+let temporizadorErrorParejas, temporizadorMensajePorDefecto, temporizador;
 
 let arregloNum = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
 arregloNum = arregloNum.sort(() => Math.random() - 0.5);
-
 
 const iniciarJuego = () => {
   juegoIniciado = true;
@@ -30,11 +45,11 @@ const iniciarJuego = () => {
   }, 2000);
 };
 
-const mostrarTiempo = () => tiempoRestante.innerHTML = `Tiempo restante: ${tiempoTotal}`;
+const mostrarTiempo = () =>
+  (tiempoRestante.innerHTML = `Tiempo restante: ${tiempoTotal}`);
 
 const mostrarMensajePorDefecto = () =>
   (mostrarMensaje.textContent = "Encuentra las parejas");
-
 
 const mostrarTarjetas = () => {
   arregloNum.map((num, i) => {
@@ -52,17 +67,31 @@ const ocultarTarjetas = () => {
   });
 };
 
-const finalizarJuego = () => {
-  if (aciertos === 8)
-    return (mostrarMensaje.innerHTML = `Felicidades!, has conseguido ganar en ${
-      20 - tiempoTotal
-    } segundos. ${botonReset}`);
+const ganarJuego = () => {
+  mostrarMensaje.innerHTML = `Felicidades!, has conseguido ganar en ${
+    20 - tiempoTotal
+  } segundos. ${botonReset}`;
+  ganar.play();
+  finalizarJuego();
+};
 
+const perderJuego = () => {
+  mostrarTarjetas();
   mostrarMensaje.innerHTML = `Has perdido :( ${botonReset}`;
   tiempoRestante.textContent = `Se agotó el tiempo`;
   perder.play();
+  finalizarJuego();
 };
 
+const finalizarJuego = () => {
+  clearInterval(temporizador);
+  clearTimeout(temporizadorErrorParejas);
+  clearTimeout(temporizadorMensajePorDefecto);
+};
+
+const comprobarJuego = () => {
+  if (aciertos === 8) return ganarJuego();
+};
 
 const iniciarTemporizador = () => {
   if (estadoTemporizador === false) {
@@ -71,10 +100,7 @@ const iniciarTemporizador = () => {
       mostrarTiempo();
 
       if (tiempoTotal === 0) {
-        clearInterval(temporizador);
-        clearTimeout(temporizadorErrorParejas);
-        mostrarTarjetas();
-        finalizarJuego();
+        perderJuego();
       }
     }, 1000);
 
@@ -87,14 +113,6 @@ const aumentarMovimientos = () => {
   mostrarMovimientos.innerHTML = `Movimientos: ${movimientos}`;
 };
 
-const comprobarJuego = () => {
-  if (aciertos === 8) {
-    ganar.play();
-    finalizarJuego();
-    mostrarTarjetas();
-  }
-};
-
 const comprobarTarjetas = () => {
   // Aciertos
   if (valorTarjeta1 === valorTarjeta2) {
@@ -102,15 +120,16 @@ const comprobarTarjetas = () => {
     aciertos++;
     mostrarAciertos.textContent = `Aciertos: ${aciertos}`;
     mostrarMensaje.innerHTML = `<span class="juegoMensajePositivo">Acierto!</span>`;
-    setTimeout(mostrarMensajePorDefecto, 1000);
+    temporizadorMensajePorDefecto = setTimeout(mostrarMensajePorDefecto, 1000);
     contadorTarjetas = 0;
+    comprobarJuego();
 
     // Equivocaciones
   } else {
     equivocarse.play();
     mostrarMensaje.innerHTML = '<span class="juegoMensajeNegativo">Ups!<span>';
     temporizadorErrorParejas = setTimeout(() => {
-      mostrarMensaje.textContent = "Encuentra las parejas";
+      mostrarMensajePorDefecto();
       // Reactiva las tarjetas
       destaparTarjeta1.disabled = false;
       destaparTarjeta2.disabled = false;
@@ -118,12 +137,9 @@ const comprobarTarjetas = () => {
       destaparTarjeta2.innerHTML = "";
       // Reinicia el contador
       contadorTarjetas = 0;
-
-      comprobarJuego();
     }, 800);
   }
 };
-
 
 const destaparTarjeta = (id) => {
   if (juegoIniciado === true) {
