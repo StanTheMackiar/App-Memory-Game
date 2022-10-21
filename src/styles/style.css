@@ -1,5 +1,6 @@
 
   /* JUEGO MEMORIA */
+
   body {
     background: rgb(118,205,150);
     background: linear-gradient(317deg, rgba(118,205,150,1) 0%, rgba(38,203,187,1) 64%, rgba(58,134,215,1) 100%);
@@ -24,10 +25,6 @@
     font-family: "Exo", sans-serif;
     margin: 1rem auto;
   }
-  header h1:hover {
-    background-color: rgba(48, 21, 206, 0.6);
-    transition: all 0.3s ease-out;
-  }
   #botonIniciarJuego {
     color: white; 
     font-weight: bold; 
@@ -39,12 +36,7 @@
     width: 10rem;
     text-align: center;
     display: block;
-
-  }
-  #botonIniciarJuego:hover {
-    cursor: pointer;
-    background-color: rgba(48, 21, 206, 0.6);
-    transition: all 0.3s ease-out;
+    cursor: pointer; 
   }
   #tablaJuegoMemoria {
     margin: 1rem auto;
@@ -65,22 +57,10 @@
     margin: 0.1rem;
     font-family: "Exo", sans-serif;
     background-color: rgb(217, 242, 243);
-    -webkit-touch-callout: none; 
-    -webkit-user-select: none;  
-    -khtml-user-select: none;    
-    -moz-user-select: none;     
-    -ms-user-select: none;   
-    user-select: none;     
-  }
-  .botonesJuego:hover {
-    background-color: rgba(48, 21, 206, 0.3);
-    color: whitesmoke;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    cursor: pointer; 
   }
   .botonesJuego:disabled {
     background-color: rgba(48, 21, 206, 0.4);
-    color: whitesmoke;
 }
   #seccionEstadisticas {
     background-color: rgba(48, 21, 206, 0.2);
@@ -126,13 +106,7 @@
     padding: 0.5rem;
     border-radius: 0.2rem;
     text-align: center;
-    background-color: rgba(48, 21, 206, 0.2);
-    -webkit-touch-callout: none; 
-    -webkit-user-select: none;  
-    -khtml-user-select: none;    
-    -moz-user-select: none;     
-    -ms-user-select: none;   
-    user-select: none;     
+    background-color: rgba(48, 21, 206, 0.2);   
   }
   .juegoMensaje:hover {
     background-color: rgba(48, 21, 206, 0.4);
@@ -144,13 +118,7 @@
     font-weight: bold;
     margin: 0.2rem;
     padding: 0.5rem;
-    text-align: center;
-    -webkit-touch-callout: none; 
-    -webkit-user-select: none;  
-    -khtml-user-select: none;    
-    -moz-user-select: none;     
-    -ms-user-select: none;   
-    user-select: none;     
+    text-align: center;  
   }
   .juegoMensajeNegativo {
     color: rgb(247, 203, 203);
@@ -158,13 +126,7 @@
     font-size: 20px;
     margin: 0.2rem;
     padding: 0.5rem;
-    text-align: center;
-    -webkit-touch-callout: none; 
-    -webkit-user-select: none;  
-    -khtml-user-select: none;    
-    -moz-user-select: none;     
-    -ms-user-select: none;   
-    user-select: none;     
+    text-align: center;    
   }
   .imagenesTarjetas {
     width: 80%;
@@ -184,10 +146,10 @@
     cursor: pointer;
   }
   .sonidoActivado {
-    content: url("./img/sonido.png");
+    content: url("../assets/img/sonido.png");
   }
   .sonidoDesactivado {
-    content: url("./img/silencio.png");
+    content: url("../assets/img/silencio.png");
   }
   #reload {
     width: 1.5rem;
