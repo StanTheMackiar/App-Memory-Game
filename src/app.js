@@ -24,7 +24,7 @@ let contadorTarjetas = 0;
 let destaparTarjeta1, destaparTarjeta2;
 let valorTarjeta1, valorTarjeta2;
 let movimientos = 0;
-let aciertos = 8;
+let aciertos = 0;
 let tiempoTotal = 20; // En segundos
 let estadoTemporizador = false;
 let juegoIniciado = false;
